@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<script type="text/javascript">
+window.onload = function() {
+ var chart = new CanvasJS.Chart("chartContainer",
+  {
+   zoomEnabled: true,
+   panEnabled: true,
+   title:{ text: "Fluctuation" },
+   axisX: { gridColor: "Silver", tickColor: "silver" },
+   toolTip: { shared:true },
+   theme: "theme2",
+   axisY: { gridColor: "Silver", tickColor: "silver", interlacedColor: "#F5F5F5" },
+   legend: { verticalAlign: "center", horizontalAlign: "right" },
+   data: [
+{% for result in results %}
+    {
+      type: "line",
+      showInLegend: true,
+      lineThickness: 2,
+      name: "{{ result.sym }}",
+      color: "#"+((1<<24)*Math.random()|0).toString(16),
+      dataPoints: [
+{% for data in result.res %}
+         { label: "{{ data.date }}", y: {{ data.val}} },
+{% endfor %}
+      ]
+    },
+{% endfor %}
+   ] } );
+chart.render();
+}
+
+</script>
+
+
+<a style="font-variant:small-caps; text-decoration:none;" href="{{ url_for('history') }}"> Historical queries </a>
+&nbsp;&nbsp;| &nbsp;&nbsp; 
+<a style="font-variant:small-caps; text-decoration:none;" href="{{ url_for('index') }}"> New Query </a>
+<br>
+
+
+<h3> {{ prevq }} </h3>
+<br>
+<div id="chartContainer" style="height: 300px; width: 100%;"> </div>
+
+
+
+{% endblock %}

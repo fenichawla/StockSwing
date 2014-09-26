@@ -1,0 +1,21 @@
+import happybase
+
+hbase = happybase.Connection('localhost')
+
+hbase.open()
+print "Printing connected tables"
+print hbase.tables()
+
+hbase_table_result = hbase.table("hbase_daily_table3")
+
+key_list = ['GOOG2014-08-08', 'AAPL1983-08-04', 'MSFT2004-08-05', 'INTC1980-03-03']
+result = hbase_table_result.row('AAPL1983-08-03')
+print result
+#print result['cf1:volatility_daily']
+#print result['cf1:vol_weekly']
+#print result['cf1:vol_monthly']
+
+results = hbase_table_result.rows(key_list)
+
+for key, data in results:
+    print key, data

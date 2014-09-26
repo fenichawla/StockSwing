@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<script type="text/javascript">
+
+function granSelect() {
+  if (document.getElementById('intraday').checked) {
+     document.getElementById('ifIntraDay').style.display = 'block';
+  }
+  else document.getElementById('ifIntraDay').style.display = 'none';
+}
+
+window.onload = function() {
+ var chart = new CanvasJS.Chart("chartContainer",
+  {
+   title:{ text: "Variation" },
+   data: [
+   {
+    type: "column",
+    dataPoints: [
+{% for result in results %}
+{ label: "{{ result.sym }}", y:{{ result.var }} },
+{% endfor %}
+    ]
+   }
+  ]
+ }
+);
+chart.render();
+}
+</script>
+
+<a style="font-variant:small-caps; text-decoration:none;" href="{{ url_for('history') }}"> Historical queries </a> &nbsp;&nbsp; | &nbsp;&nbsp; 
+<a style="font-variant:small-caps; text-decoration:none;" href="{{ url_for('query_index') }}"> Query index </a>
+<br>
+<br>
+  <form action="{{ url_for('query') }}" method="post">
+    Input Query:&nbsp;<input style="height:25px" type="text" size="30" name="query">
+    <input type="submit" value="Submit">
+  </form>
+<br>
+
+<form id=analysis>
+<fieldset>
+<legend> Earnings announcement information </legend>
+<ol>
+  <li>
+    <label for="maincomp">Company </label>
+    <input id="maincomp" name="maincomp" type=text placeholder="Enter ticker symbol" required autofocus>
+  </li>
+  <li>
+    <label for="sdate">Starting:</label> <input type="date" name="sdate">
+    <label for="edate">Ending:</label> <input type="date" name="edate">
+  </li>
+</ol>
+</fieldset>
+<br>
+<fieldset>
+<legend> Stock information </legend>
+<ol>
+  <li>
+      <label for="comps">Comparison companies (seperated by ';' )</label>
+      <textarea id="comps" name="comps" type=text required></textarea>
+  </li>
+  <li> <label for="granularity">Data Granularity &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; </label>
+    <input type="radio" name="granularity" onclick="javascript:granSelect();" id="intraday" value="intraday"> Intra-day
+    <input type="radio" name="granularity" onclick="javascript:granSelect();" id="daily" value="daily"> Daily <br>
+    <div id="ifIntraDay" style="display:none">
+      Please specify top cut-off: <input type="text" id="cutoff" name="cutoff" value="10"> %
+    </div>
+  </li>
+</ol>
+</fieldset>
+<fieldset>
+  <button type=submit>Run Query!</button>
+</fieldset>
+</form>
+
+
+{% if prevq != '' %}
+Results for query <b> {{ prevq }} </b>:
+<br><br>
+<br>
+<div id="chartContainer" style="height: 300px; width: 100%;"> </div>
+{% endif %}
+
+{% endblock %}
