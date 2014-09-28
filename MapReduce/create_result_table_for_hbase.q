@@ -1,3 +1,4 @@
+-- Copyright: (c) 2014 by Feni Chawla.
 -- Create stock table
 
 CREATE EXTERNAL TABLE IF NOT EXISTS stock_data (

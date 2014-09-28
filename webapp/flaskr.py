@@ -25,6 +25,10 @@ qs = []
 def history():
     return render_template('history.html', hist=qs)
 
+@app.route("/about")
+def about():
+    return render_template('about.html')
+
 @app.route("/qindex")
 def query_index():
     return render_template('qindex.html')
@@ -46,6 +50,7 @@ def buildquery(maincomp, sdate, edate, comps, gran):
     return qry
 
 def processdailyquery(sdate, edate, maincomp, comps):
+    print "############DAILY QUERY##############"
     klist = []
     # process the data from daily table, build the key list
 ###    hbase_table_seeded = hbase.table("hbase_date_result_table")
@@ -57,6 +62,7 @@ def processdailyquery(sdate, edate, maincomp, comps):
     delta = datetime.timedelta(days=1)
     while d <= edate:
 ###        key = maincomp + " " + d.strftime('%Y-%m-%d')
+        
         key = maincomp + d.strftime('%Y-%m-%d')
         klist.append(key)
         d += delta
@@ -70,14 +76,10 @@ def processdailyquery(sdate, edate, maincomp, comps):
             sklistc.append(key)
             d += delta
         sklist.append(sklistc)
+
     # retrieve results from Hbase
-    print "###KLIST###"
-    print klist
     hresults = hbase_table_seeded.rows(klist)
-###    results = [dict(date=re.sub('[A-Z ]','',i), val=float(j['cf1:vol_daily'])) for i, j in hresults]
     results = [dict(date=re.sub('[A-Z ]','',i), val=float(j['cf1:volatility_daily'])) for i, j in hresults]
-    print "###RESULTS###"
-    print results
 
     # build list of all results
     clist.insert(0, maincomp)
@@ -87,11 +89,14 @@ def processdailyquery(sdate, edate, maincomp, comps):
         hresults = hbase_table_seeded.rows(l)
 ###        results = [dict(date=re.sub('[A-Z ]', '',i), val=float(j['cf1:vol_daily'])) for i, j in hresults]
         results = [dict(date=re.sub('[A-Z ]', '',i), val=float(j['cf1:volatility_daily'])) for i, j in hresults]
-
-    result_lists.append(results)
+        result_lists.append(results)
     resmap = {}
     i=0
     resmap = [dict(sym=a, res=b) for a, b in zip(clist, result_lists)]
+    for a,b in resmap:
+        print "####"
+        print "SYM:"+a
+        print "RESULT:"+b
     return resmap
 
 def processintradayquery(sdate, edate, maincomp, comps):
@@ -106,6 +111,7 @@ def processintradayquery(sdate, edate, maincomp, comps):
     complist = list(comps.split(";"))
     complist.insert(0,maincomp)
     complist = filter(lambda a: a != "", complist)
+#    complist.append("")
     print complist
 
     # Initialize result dict
@@ -129,8 +135,8 @@ def processintradayquery(sdate, edate, maincomp, comps):
         for each in klist:
             print "key = " 
             print each
-            varlist = hbase_intra.scan(row_prefix=each)
-            print varlist
+            #varlist = hbase_intra.scan(row_prefix=each)
+            #print varlist
             for key, data in hbase_intra.scan(row_prefix = each):
                 print "After table scan"
                 #print each
@@ -190,3 +196,4 @@ if __name__ == "__main__":
     app.debug = True
     app.run(host='0.0.0.0')
 
+    hbase.close()

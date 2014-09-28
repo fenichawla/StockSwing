@@ -1,3 +1,4 @@
+-- Copyright: (c) 2014 by Feni Chawla.
 -- Create result table in HBase
 CREATE TABLE
 hbase_daily_vol_table (tickerdate STRING, volatility_daily STRING, high_daily STRING, low_daily STRING)

@@ -1,4 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python                                                                             
+# copyright: (c) 2014 by Feni Chawla.                                        
+
 import urllib2
 import datetime
 from kafka import KafkaClient, SimpleProducer

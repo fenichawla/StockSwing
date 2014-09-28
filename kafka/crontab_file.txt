@@ -1,0 +1,4 @@
+# m h  dom mon dow   command
+#*/5 * * * * /home/ubuntu/feni/scripts/GetIntraDayData.sh 
+*/15 13-21 * * 1-5 /home/ubuntu/feni/kafka/kafka_producer.py
+* 23 * * 1-5 /home/ubuntu/feni/kafka/write_daily_data_to_hdfs.sh

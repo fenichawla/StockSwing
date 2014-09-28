@@ -2,7 +2,9 @@
 {% block body %}
 
 
-<a style="font-variant:small-caps; text-decoration:none;" href="{{ url_for('history') }}"> Historical queries </a><br>
+<a style="font-variant:small-caps; text-decoration:none;" href="{{ url_for('history') }}"> Historical queries </a>
+<br>
+
 
 {% if errmsg != '' %}
 <a style="color:red; font-style:italic;"> {{ errmsg }} </a> <br>

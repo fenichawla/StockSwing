@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# copyright: (c) 2014 by Feni Chawla.
+
 # Implementation of kafka consumer which writes to HBase intraday table
 import datetime
 import happybase
@@ -28,7 +30,7 @@ wr_file = open('/home/ubuntu/feni/data/kafka_logs/consumer_logfile.txt','a')
 daily_log = open('/home/ubuntu/feni/data/kafka_logs/consumer_daily_data_log.txt','a')
 
 # Write data to a file which will be synced with HDFS repeatedly
-#hdfs_file = open('/home/ubuntu/feni/data/rt/hdfs_sync.txt','a')
+hdfs_file = open('/home/ubuntu/feni/data/rt/hdfs_sync.txt','a')
 
 daily_log.write("Daily data logging started\n")
 
@@ -70,7 +72,7 @@ for message in consumer:
         wr_file.write(now + ": Written to HBase\n") 
         
         # Update daily data in HBase based on this streamed data 
-        daily_rowkey = messagesplit[0] + "_" + date
+        daily_rowkey = messagesplit[0] + date
 
         daily_result = hbase_daily.row(daily_rowkey)
         
@@ -97,7 +99,8 @@ for message in consumer:
         daily_log.write(daily_rowkey + "cf1:variance: " + str(new_variance) + "cf1:high_value:" + str(new_high) + "cf1:low_value:" + str(new_low) + "\n")
 
 
-        # TODO - Also write this data to a file which will be written to HDFS periodically through a sh script. The sh script will be  run every night using cron 
+        # TODO - Also write this data to a file which will be written to HDFS every night through a sh script. The sh script will be  run every night using cron 
+        hdfs_file.write(daily_rowkey + ", " + str(new_high) + ", " + str(new_low) + ", " + str(variance))
 
 hbase.close()
 wr_file.close()    
