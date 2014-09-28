@@ -20,7 +20,7 @@ The following data pipeline was used.
   2 Main components of the data pipeline:
   1. Batch processing: <br>
   This is a one time operation performed on the historical data set. For batch processing, I first clean and normalize the data using several scripts written in shell and python, and then store the data in HDFS. A hive mapreduce job is then run to pre-calculate stock price fluctuation and the results are stored into HBase for quick querying.<br>
-  2. Real time processing:
+  2. Real time processing:<br>
   To provide access to real time price fluctuation, real time data processing is done on live data streamed from the cloud. This is implemented in Python using Kafka. The producer pulls data from the cloud at 15 minute intervals. There are 2 consumers at the end of the kafka queue - 1 which does the price fluctuation calculation and pushes the result to HBase, and the other which aggregates data into HDFS. 
 
 
