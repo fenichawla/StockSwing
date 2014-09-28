@@ -1,4 +1,0 @@
- * Running on http://0.0.0.0:5000/
- * Restarting with reloader
-67.180.85.238 - - [21/Sep/2014 22:54:26] "GET / HTTP/1.1" 200 -
-67.180.85.238 - - [21/Sep/2014 22:54:42] "GET / HTTP/1.1" 200 -
