@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+<br>
+<h3> Query index </h3>
+<ol>
+<li> Finding stock price variance for all companies on a given date (Sep 4, 2014)
+<li> Find daily variance in the stock price of a given company (Apple) for a given month (Aug 2014)
+</ol>
+<br><br>
+<a href="{{ url_for('index') }}"> <i> Go back to analyzing</i> </a>
+{% endblock %}

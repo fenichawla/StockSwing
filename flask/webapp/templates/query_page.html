@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<a style="font-variant:small-caps; text-decoration:none;" href="{{ url_for('history') }}"> Historical queries </a>
+<br>
+
+
+{% if errmsg != '' %}
+<a style="color:red; font-style:italic;"> {{ errmsg }} </a> <br>
+{% endif %}
+
+<form id=analysis action="{{ url_for('query') }}" method="post">
+<fieldset>
+<ol>
+  <li>
+    <label for="maincomp"><b>Company</b> </label><br>
+    <input id="maincomp" name="maincomp" type=text placeholder="Enter ticker symbol" required autofocus>
+  </li>
+  <li>
+    <label for="sdate"><b>Starting:</b></label> <br><input type="date" name="sdate" required><br>
+    <label for="edate"><b>Ending:</b></label> <br><input type="date" name="edate" required><br>
+  </li>
+  <li>
+      <label for="comps"><b>Comparison companies (seperated by ';' )</b></label>
+      <textarea id="comps" name="comps" type=text required></textarea>
+  </li>
+  <li> <label for="granularity"><b>Data Granularity</b> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; </label>
+    <input type="radio" name="granularity" id="daily" value="daily" checked><b>Daily</b> 
+    <input type="radio" name="granularity" id="intraday" value="intraday"> <b>Intraday</b>
+  </li>
+</ol>
+</fieldset>
+<fieldset>
+  <button type=submit>Run Query!</button>
+</fieldset>
+</form>
+
+
+
+
+{% endblock %}

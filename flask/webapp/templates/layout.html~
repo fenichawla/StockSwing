@@ -1,0 +1,13 @@
+<!doctype html>
+<head>
+<title> Feni Chawla Insight Project </title>
+<script type="text/javascript" src="{{ url_for('static', filename='canvasjs.min.js') }}"></script><head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<div class="page">
+  <h1>Analyzing stock market behavior</h1>
+<!--  <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...because greed is good! </h2> -->
+  <br>
+  <br>
+
+{% block body %}{% endblock %}
+</div>

@@ -1,0 +1,19 @@
+<!doctype html>
+<head>
+<title> Feni Chawla Insight Project </title>
+<script type="text/javascript" src="{{ url_for('static', filename='canvasjs.min.js') }}"></script>
+<head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tables.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='graph.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='formstyle.css') }}">
+<div class="page">
+<div align="right" > <a style="font-variant:small-caps; text-decoration:none;" href="{{ url_for('about') }}"> About Me </a></div>
+  <h1>Stock Swing </h1>
+  <h2>Compare price fluctuation of different stocks </h2>
+<!--  <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Compare price fluctuation of different stocks </h2> -->
+  <br>
+  <br>
+
+{% block body %}{% endblock %}
+</div>

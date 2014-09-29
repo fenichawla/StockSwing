@@ -1,0 +1,7 @@
+<!doctype html>
+<title>Feni Insight Project</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<br>
+<img src="{{ url_for('static', filename='Gordon_Gekko.jpg') }}">
+<br>
+<a href="{{ url_for('index') }}"> <i> Go back to more serious stuff </i> </a>
