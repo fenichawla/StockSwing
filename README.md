@@ -1,5 +1,5 @@
 #Stock Swing
-Developed by by Feni Chawla
+Developed by Feni Chawla
 
 StockSwing is a webapp which enables any user to quickly query stock price fluctuations for multiple companies very quickly and easily. 
 
