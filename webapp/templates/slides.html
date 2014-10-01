@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<a style="font-variant:small-caps; text-decoration:none;" href="{{ url_for('history') }}"> Historical queries </a>
+<br><br>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/39672478" width="400" height="300" align="middle" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe>
+
+<br><br>
+<a href="{{ url_for('index') }}"> <i> Go back to analyzing</i> </a>
+{% endblock %}

@@ -8,6 +8,7 @@ import os
 import re
 import happybase
 import datetime
+#import math
 
 from subprocess import Popen, PIPE
 from flask import Flask, request, session, g, redirect, url_for, abort, \
@@ -28,6 +29,10 @@ def history():
 @app.route("/about")
 def about():
     return render_template('about.html')
+
+@app.route("/slides")
+def slides():
+    return render_template('slides.html')
 
 @app.route("/qindex")
 def query_index():
@@ -78,7 +83,11 @@ def processdailyquery(sdate, edate, maincomp, comps):
         sklist.append(sklistc)
 
     # retrieve results from Hbase
+    print "###KLIST###"
+    print klist
     hresults = hbase_table_seeded.rows(klist)
+    print "hresults = "
+    print hresults
     results = [dict(date=re.sub('[A-Z ]','',i), val=float(j['cf1:volatility_daily'])) for i, j in hresults]
 
     # build list of all results
@@ -88,7 +97,7 @@ def processdailyquery(sdate, edate, maincomp, comps):
     for l in sklist:
         hresults = hbase_table_seeded.rows(l)
 ###        results = [dict(date=re.sub('[A-Z ]', '',i), val=float(j['cf1:vol_daily'])) for i, j in hresults]
-        results = [dict(date=re.sub('[A-Z ]', '',i), val=float(j['cf1:volatility_daily'])) for i, j in hresults]
+        results = [dict(date=re.sub('[A-Z ]', '',i), val=abs(float(j['cf1:volatility_daily']))) for i, j in hresults]
         result_lists.append(results)
     resmap = {}
     i=0
@@ -144,7 +153,7 @@ def processintradayquery(sdate, edate, maincomp, comps):
                 date_time = str(key.split("_")[1] + "_" + key.split("_")[2])
                 #print date_time
                 ##dateresult[date_time] = data['cf1:variance']
-                dateresult.append(dict(date=date_time, val=data['cf1:variance']));
+                dateresult.append(dict(date=date_time, val=abs(float(data['cf1:variance']))));
                 #print data['cf1:variance']
             print "############Date time dict############\n"
             print dateresult
