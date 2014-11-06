@@ -1,7 +1,7 @@
 #Stock Swing
 Developed by Feni Chawla
 
-StockSwing is a webapp which enables any user to quickly query stock price fluctuations for multiple companies very quickly and easily. 
+StockSwing is a webapp which enables any user to query stock price fluctuations for multiple companies very quickly and easily. 
 
 Stock Swing was implemented as a pat of a three week project for Insight Data Engineering fellowship program. I used historical and real time stock data from Yahoo finance for over 6000 companies listed on NASDAQ, NYSE and AMEX exchanges.  
 
@@ -46,9 +46,9 @@ For easy comparison of the price fluctuations, Canvas.js is used to display the 
 
 ##How to run
 
-To run the web application server, please do the following:
+Please note that the AWS cluster hosting this project has now been taken off so it can not be run anymore. Before the server was disconnected it could be run using the following instructions.
+
+To run the web application server, the following could be run on the command line:
 ./runwebapp.sh
 
-This is already running on my AWS cluster, so there is no need to run this again.
-
-To find the webapp on any client and to run it please go to http://feni.mitalfamily.com/
+The webapp could be found and run on any client by using the following URL: http://feni.mitalfamily.com/
