@@ -3,7 +3,7 @@ Developed by Feni Chawla
 
 StockSwing is a webapp which enables any user to query stock price fluctuations for multiple companies very quickly and easily. 
 
-Stock Swing was implemented as a pat of a three week project for Insight Data Engineering fellowship program. I used historical and real time stock data from Yahoo finance for over 6000 companies listed on NASDAQ, NYSE and AMEX exchanges.  
+Stock Swing was implemented as a pat of a project for Insight Data Engineering fellowship program. I used historical and real time stock data from Yahoo finance for over 6000 companies listed on NASDAQ, NYSE and AMEX exchanges.  
 
 
 ##Data pipeline for StockSwing
